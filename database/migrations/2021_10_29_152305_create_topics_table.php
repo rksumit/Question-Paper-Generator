@@ -15,6 +15,9 @@ class CreateTopicsTable extends Migration
     {
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
+            $table->string("topic");
+            $table->double("hoursallocated");
+            $table->foreignId('subject_id')->constrained("topics");
             $table->timestamps();
         });
     }
