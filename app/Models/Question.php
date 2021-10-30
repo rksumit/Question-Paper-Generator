@@ -13,8 +13,8 @@ class Question extends Model
         return $this->belongsToMany(QuestionSet::class);
     }
 
-    public function Topic()
+    public function topic()
     {
-        return $this->hasMany(Topic::class);
+        return $this->belongsTo(Topic::class);
     }
 }

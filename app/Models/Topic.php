@@ -10,6 +10,6 @@ class Topic extends Model
     use HasFactory;
     public function questions()
     {
-        return $this->belongsTo(Question::class);
+        return $this->hasMany(Question::class);
     }
 }
