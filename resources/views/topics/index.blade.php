@@ -44,12 +44,13 @@
         </thead>
         </thead>
         <tbody>
+            {{-- {{ dd($topics)}} --}}
             @foreach ($topics as $topic)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $topic->topic }}</td>
                     <td>{{ $topic->hoursallocated }}</td>
-                    <td>{{ $topic->subject }}</td>
+                    <td>{{ $topic->subject->name }}</td>
                     <td>
 
                         <a href="{{ url('/topics/' . $topic->id . '/edit') }}" title="Edit topic"><button

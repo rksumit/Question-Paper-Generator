@@ -17,7 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->string("question");
             $table->double("weightage");
-            $table->string("diffuclty_level");
+            $table->string("difficulty_level");
             $table->foreignId('user_id')->constrained();
             $table->foreignId('topic_id')->constrained();
             $table->timestamps();

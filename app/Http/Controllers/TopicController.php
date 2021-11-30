@@ -17,7 +17,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Subject::with('topics')->get();
+        $topics = Topic::with('subject')->get();
         return view('topics.index', compact('topics'));
     }
 
@@ -38,12 +38,13 @@ class TopicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        // dd('Hello');
+    //    dd($request->all());
         $data = $request->validate([
             'topic' => 'required',
-            'hoursallocated' => 'required',
+            'hoursallocated' => 'required|gt:0',
             'subject_id' => 'required',
 
         ]);
@@ -71,7 +72,8 @@ class TopicController extends Controller
         $topics = Topic::find($topic->id);
         // dd($topic);
         $topics = Topic::all();
-        return view('topics.edit', compact('topic', 'topics'));
+        $subjects = Subject::all();
+        return view('topics.edit', compact('topic', 'topics', 'subjects'));
     }
 
     /**

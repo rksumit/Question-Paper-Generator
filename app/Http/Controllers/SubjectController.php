@@ -28,9 +28,10 @@ class SubjectController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'code' => 'required|string|max:255',
-            'teacher_id' => 'required|int',
+            'code' => 'required|string|max:255|unique:subjects,code',
+            'teacher_id' => 'required|int|exists:teachers,id',
         ]);
+
         // dd($data);
         Subject::create($data);
         return redirect()->route('subjects.index')

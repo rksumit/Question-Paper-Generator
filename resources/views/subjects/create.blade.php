@@ -25,16 +25,23 @@
                         <label class="control-label col-sm-3" for="entersubjects"><b> Name</b></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="name" id="entersubjects"
-                                value="{{ old('name') ? old('name') : '' }}" required>
+                                value="{{ old('name') ? old('name') : '' }}" >
                         </div>
                     </div>
+                    @if($errors->has('name'))
+                    <div class="alert alert-danger">{{ $errors->first('name') }}</div>
+                @endif
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="code"><b>Subject Code</b></label>
                         <div class="col-sm-5">
-                            <input type="number" class="form-control" name="code" id="code"
+                            <input type="text" class="form-control" name="code" id="code"
                                 value="{{ old('code') ? old('code') : '' }}" required>
                         </div>
+
                     </div>
+                    @if($errors->has('code'))
+                    <div class="alert alert-danger">{{ $errors->first('code') }}</div>
+                @endif
                     {{-- <div class="form-group">
             <label class="control-label col-sm-3" for="Questionset"><b>Subject</b></label>
             <div class="col-sm-5">
@@ -63,6 +70,9 @@
                             </select>
                         </div>
                     </div>
+                    @if($errors->has('teacher_id'))
+                    <div class="alert alert-danger">{{ $errors->first('teacher_id') }}</div>
+                @endif
 
 
 

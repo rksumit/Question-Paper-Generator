@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,5 @@ Route::middleware('auth')->group(function () {
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
     Route::resource('subjects', SubjectController::class);
     Route::resource('topics', TopicController::class);
+    Route::resource('questions', QuestionController::class);
 });

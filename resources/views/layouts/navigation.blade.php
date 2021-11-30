@@ -24,9 +24,7 @@
             <span class="text">{{ __('Users') }}</span>
         </a>
     </li>
-    <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
-        <a href="AddQuestion"> Questions </a>
-    </li>
+
     <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
         <a href="{{ route('subjects.index') }}"> Subjects </a>
     </li>
@@ -34,6 +32,9 @@
         <a href="{{ route('topics.index') }}"> Topics </a>
     </li>
     <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
-        <a href="AddQuestion"> Questions </a>
+        <a href="{{ route('questions.index') }}"> Questions </a>
     </li>
+    {{-- <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
+        <a href="AddQuestion"> Teacher </a>
+    </li> --}}
 </ul>

@@ -19,7 +19,7 @@ class CreateTeachersTable extends Migration
             $table->string("address");
             $table->string("qualification");
             $table->string("experience");
-            $table->double("phone");
+            $table->string("phone");
             $table->foreignId("user_id")->constrained();
             $table->timestamps();
         });
