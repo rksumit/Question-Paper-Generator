@@ -87,17 +87,17 @@ class TopicController extends Controller
     {
         $data = $request->validate([
             'topic' => 'required',
-            'hoursallocated' => 'required',
+            'hoursallocated' => 'required|gt:0',
             'subject_id' => 'required',
 
         ]);
 
-        dd($data);
+        // dd($data);
 
         $topic->update([
             'topic' => $data['topic'],
-            'hoursallocated' => $data['housrsallocated'],
-            'subject_id' => $data['subject'],
+            'hoursallocated' => $data['hoursallocated'],
+            'subject_id' => $data['subject_id'],
 
         ]);
         return redirect()->route('topics.index')

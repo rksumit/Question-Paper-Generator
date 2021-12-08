@@ -29,12 +29,18 @@
           <input type="text" class="form-control" name="question" id="enterquestions" value="{{$question->question}}" required>
         </div>
         </div>
+        @if($errors->has('question'))
+        <div class="alert alert-danger">{{ $errors->first('question') }}</div>
+    @endif
         <div class="form-group">
           <label class="control-label col-sm-3" for="weightage"><b>Weightage</b></label>
           <div class="col-sm-5">
           <input type="number" class="form-control" name="weightage" id="weightage" value="{{$question->weightage}}" required>
         </div>
         </div>
+        @if($errors->has('weightage'))
+        <div class="alert alert-danger">{{ $errors->first('weightage') }}</div>
+    @endif
         {{-- <div class="form-group">
             <label class="control-label col-sm-3" for="Questionset"><b>Subject</b></label>
             <div class="col-sm-5">
@@ -62,6 +68,9 @@
           </select>
         </div>
         </div>
+        @if($errors->has('topic'))
+        <div class="alert alert-danger">{{ $errors->first('topic') }}</div>
+    @endif
 
         <div class="form-group">
             <label class="control-label col-sm-3" for="difficulty_level"><b>Difficulty Level</b></label>
@@ -73,6 +82,9 @@
           </select>
         </div>
         </div>
+        @if($errors->has('difficulty_level'))
+        <div class="alert alert-danger">{{ $errors->first('difficulty_level') }}</div>
+    @endif
 
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-10">

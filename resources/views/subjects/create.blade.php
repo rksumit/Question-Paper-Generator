@@ -35,7 +35,7 @@
                         <label class="control-label col-sm-3" for="code"><b>Subject Code</b></label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="code" id="code"
-                                value="{{ old('code') ? old('code') : '' }}" required>
+                                value="{{ old('code') ? old('code') : '' }}" >
                         </div>
 
                     </div>

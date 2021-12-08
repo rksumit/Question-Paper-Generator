@@ -87,8 +87,8 @@ class QuestionController extends Controller
     public function update(Request $request, Question $question)
     {
         $data = $request->validate([
-            'question' => 'required',
-            'weightage' => 'required',
+            'question' => 'required|unique:questions,question',
+            'weightage' => 'required|gt:0',
             'topic' => 'required',
             'difficulty_level' => 'required',
         ]);

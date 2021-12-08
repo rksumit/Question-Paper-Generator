@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Topic;
+use App\Rules\CodeRule;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -24,13 +26,9 @@ class SubjectController extends Controller
         return view('subjects.create', compact('teachers'));
     }
 
-    public function store(Request $request)
+    public function store(SubjectRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'code' => 'required|string|max:255|unique:subjects,code',
-            'teacher_id' => 'required|int|exists:teachers,id',
-        ]);
+        $data = $request->validated();
 
         // dd($data);
         Subject::create($data);
@@ -44,13 +42,13 @@ class SubjectController extends Controller
         $subject->load('teacher');
         return view('subjects.edit', compact('subject', 'teachers'));
     }
-    public function update(Request $request, Subject $subject)
+    public function update(SubjectRequest $request, Subject $subject)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'code' => 'required|string|max:255',
-            'teacher_id' => 'required|int',
-        ]);
+        $data = $request->validated();
+        //     'name' => 'required|string|max:255|unique:subjects,name',
+        //     'code' => 'required|string|max:8|unique:subjects,code',
+        //     'teacher_id' => 'required|int',
+        // ]);
         // dd($data);
 
         $subject->update($data);

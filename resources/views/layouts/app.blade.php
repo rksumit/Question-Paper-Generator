@@ -82,6 +82,7 @@
         <!-- ========== section start ========== -->
         <section class="section">
             <div class="container-fluid">
+                @include('sweetalert::alert')
                 @yield('content')
             </div>
             <!-- end container -->
@@ -115,6 +116,7 @@
     <!-- ========= All Javascript files linkup ======== -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>
