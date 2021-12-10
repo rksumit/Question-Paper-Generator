@@ -35,4 +35,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('subjects', SubjectController::class);
     Route::resource('topics', TopicController::class);
     Route::resource('questions', QuestionController::class);
+    Route::get('/questionsetgen',[QuestionController::class, 'genQuestionSet'])->name('questions.set');
 });

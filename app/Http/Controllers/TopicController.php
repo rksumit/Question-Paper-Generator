@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TopicRequest;
+use App\Http\Requests\UpdateSubjectRequest;
+use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Question;
 use App\Models\Subject;
 use App\Models\Topic;
@@ -39,22 +42,12 @@ class TopicController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request)
+    public function store(TopicRequest $request)
     {
-    //    dd($request->all());
-        $data = $request->validate([
-            'topic' => 'required',
-            'hoursallocated' => 'required|gt:0',
-            'subject_id' => 'required',
 
-        ]);
-        // dd($request->user());
-        Topic::create([
-            'topic' => $data['topic'],
-            'hoursallocated' => $data['hoursallocated'],
-            'subject_id' => $data['subject_id'],
+        $data = $request->validated();
 
-        ]);
+        Topic::create($data);
 
         return redirect()->route('topics.index')
             ->with('success', 'Topic created successfully.');
@@ -83,23 +76,13 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Topic $topic)
+    public function update(UpdateTopicRequest $request, Topic $topic)
     {
-        $data = $request->validate([
-            'topic' => 'required',
-            'hoursallocated' => 'required|gt:0',
-            'subject_id' => 'required',
-
-        ]);
+        $data = $request->validated();
 
         // dd($data);
 
-        $topic->update([
-            'topic' => $data['topic'],
-            'hoursallocated' => $data['hoursallocated'],
-            'subject_id' => $data['subject_id'],
-
-        ]);
+        $topic->update($data);
         return redirect()->route('topics.index')
             ->with('success', 'Topic updated successfully');
     }

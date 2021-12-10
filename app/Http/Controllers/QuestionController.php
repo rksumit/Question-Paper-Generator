@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionRequest;
+use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Question;
 use App\Models\Subject;
 use App\Models\Topic;
@@ -40,15 +42,10 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionRequest $request)
     {
         // dd($request->all());
-        $data = $request->validate([
-            'question' => 'required|unique:questions,question',
-            'weightage' => 'required|gt:0',
-            'topic' => 'required',
-            'difficulty_level' => 'required',
-        ]);
+        $data = $request->validated();
         // dd($request->user());
         Question::create([
             'question' => $data['question'],
@@ -84,21 +81,11 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(UpdateQuestionRequest $request, Question $question)
     {
-        $data = $request->validate([
-            'question' => 'required|unique:questions,question',
-            'weightage' => 'required|gt:0',
-            'topic' => 'required',
-            'difficulty_level' => 'required',
-        ]);
+        $data = $request->validated();
 
-        $question->update([
-            'question' => $data['question'],
-            'weightage' => $data['weightage'],
-            'difficulty_level' => $data['difficulty_level'],
-            'topic_id' => $data['topic'],
-        ]);
+        $question->update($data);
         return redirect()->route('questions.index')
                         ->with('success','Question updated successfully');
     }
@@ -115,5 +102,10 @@ class QuestionController extends Controller
 
         return redirect()->route('questions.index')
                         ->with('success','Question deleted successfully');
+    }
+
+    public function genQuestionSet() {
+        $topics = Topic::all();
+        return view('questions.questionSet', compact('topics'));
     }
 };

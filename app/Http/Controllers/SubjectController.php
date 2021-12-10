@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SubjectRequest;
+use App\Http\Requests\UpdateSubjectRequest;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Topic;
@@ -42,14 +43,9 @@ class SubjectController extends Controller
         $subject->load('teacher');
         return view('subjects.edit', compact('subject', 'teachers'));
     }
-    public function update(SubjectRequest $request, Subject $subject)
+    public function update(UpdateSubjectRequest $request, Subject $subject)
     {
         $data = $request->validated();
-        //     'name' => 'required|string|max:255|unique:subjects,name',
-        //     'code' => 'required|string|max:8|unique:subjects,code',
-        //     'teacher_id' => 'required|int',
-        // ]);
-        // dd($data);
 
         $subject->update($data);
 

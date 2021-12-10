@@ -34,6 +34,9 @@
     <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
         <a href="{{ route('questions.index') }}"> Questions </a>
     </li>
+    <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
+        <a href="{{ route('questions.set') }}"> Generate Question Set </a>
+    </li>
     {{-- <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
         <a href="AddQuestion"> Teacher </a>
     </li> --}}
