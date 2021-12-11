@@ -54,7 +54,7 @@
                             <input type="number" class="form-control" placeholder="Enter the weightage in percent of the topic" name="weightage[]">
                         </div>
                         <div class="col-sm-3">
-                            <a onclick="addInput()" class="add-input">
+                            <a id="add-input" class="add-input">
                             <i class="fas fa-plus-circle" style="font-size: 2rem"></i>
                             </a>
                         </div>
@@ -84,7 +84,10 @@
 
 @section('scripts')
     <script>
-        function addInput() {
+        document.getElementById('add-input').addEventListener('click',function () {
+            // console.log("Hello")
+            let div = document.createElement('div');
+            div.classList.add('col-sm-5');
             var input = document.createElement('input');
             var req = document.getElementById('requirements');
             input.setAttribute('type', 'text');
@@ -98,7 +101,7 @@
             if(el.style.display == 'none') {
                 el.style.display = 'block'
             }
-        }
+        });
 
         function removeInput() {
             let req = document.getElementsByClassName('req');
@@ -114,4 +117,5 @@
         function insertAfter(newNode, existingNode) {
             existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
         }
+        </script>
 @endsection
