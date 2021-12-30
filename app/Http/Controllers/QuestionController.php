@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\QuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Question;
+use App\Models\QuestionSet;
 use App\Models\Subject;
 use App\Models\Topic;
 use Illuminate\Http\Request;
@@ -107,5 +108,30 @@ class QuestionController extends Controller
     public function genQuestionSet() {
         $topics = Topic::all();
         return view('questions.questionSet', compact('topics'));
+    }
+
+    public function generateSet(Request $request) {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'topics' => 'array',
+            'weightage' => 'array'
+        ]);
+        $topics = [1,1,1,2,2,2];
+        $questionSet = QuestionSet::create([
+            'letter' => $validated['name']
+        ]);
+        $questions = [];
+        foreach ($topics as $topic) {
+            $question = Question::where('topic_id', $topic)->inRandomOrder()->first();
+            for ($i=0; $i<count($questions); $i++) {
+                if ($questions[$i] == $question) {
+                    $i=0;
+                    $question = Question::where('topic_id', $topic)->inRandomOrder()->first();
+                }
+            }
+            array_push($questions, $question);
+            $questionSet->questions()->attach($question);
+        }
+        dd($questions);
     }
 };

@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<form class="form-horizontal" action="{{ route('topics.store') }}" method="POST">
+<form class="form-horizontal" action="{{ route('questions.generate') }}" method="POST">
     @csrf
 
     <div class="card">
@@ -53,9 +53,9 @@
                         <div class="col-sm-4">
                             <input type="number" class="form-control" placeholder="Enter the weightage in percent of the topic" name="weightage[]">
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3" id="buttons">
                             <a id="add-input" class="add-input">
-                            <i class="fas fa-plus-circle" style="font-size: 2rem"></i>
+                                <i class="fas fa-plus-circle" style="font-size: 2rem"></i>
                             </a>
                         </div>
                     </div>
@@ -84,38 +84,113 @@
 
 @section('scripts')
     <script>
+        let topics = @json($topics);
+        // console.log(topics)
         document.getElementById('add-input').addEventListener('click',function () {
-            // console.log("Hello")
-            let div = document.createElement('div');
-            div.classList.add('col-sm-5');
-            var input = document.createElement('input');
-            var req = document.getElementById('requirements');
-            input.setAttribute('type', 'text');
-            input.setAttribute('placeholder', 'Enter Document Required');
-            input.setAttribute('name', 'requirements[]');
-            input.classList.add('form-control');
-            input.classList.add('req');
-            input.classList.add('mt-2');
-            insertAfter(input, req)
+            let input = document.createElement('input');
+            let req = document.getElementById('container');
+            let select = document.createElement('select');
+            let bigDiv = document.createElement('div');
+            let smallDiv = document.createElement('div');
+            select.classList.add('form-control');
+            select.setAttribute('name', 'topics[]');
+            let option;
+            let selects = document.getElementsByName('topics[]');
+            // console.log(selects[0].children[0])
 
-            if(el.style.display == 'none') {
-                el.style.display = 'block'
+            if (topics.length == selects.length) {
+                return;
             }
+            if(topics.length > 0) {
+                topics.forEach(function (topic, index) {
+                    let flag = false;
+                    for(let i=0; i<selects.length; i++) {
+                        if(selects[i].value == topic.id) {
+                            flag = true;
+                        }
+                    }
+                    if(!flag) {
+                        // console.log(index)
+                        if ( select.childElementCount == 0 ) {
+                            for(let i=0; i<selects.length; i++) {
+                                for (let j=0; j<selects[i].children.length; j++) {
+                                    if (selects[i].children[j].innerText == topic.topic) {
+                                        selects[i].children[j].remove();
+                                    }
+                                }
+                                // console.log(selects[i].children.length)
+                            }
+                        }
+                        option = document.createElement('option');
+                        option.setAttribute('value', topic.id);
+                        option.innerText = topic.topic;
+                        select.appendChild(option);
+                    }
+                })
+
+            } else {
+                return
+            }
+            input.setAttribute('type', 'number');
+            input.setAttribute('placeholder', 'Enter the weightage in percent of the topic');
+            input.setAttribute('name', 'weightage[]');
+            input.classList.add('form-control');
+
+            bigDiv.classList.add('col-sm-5');
+            bigDiv.appendChild(select);
+            bigDiv.style.marginTop = '1rem';
+            smallDiv.classList.add('col-sm-4');
+            smallDiv.appendChild(input)
+            smallDiv.style.marginTop = '1rem';
+
+
+            req.appendChild(bigDiv);
+            req.appendChild(smallDiv);
+
+            let buttons = document.getElementById('buttons');
+            if (!document.getElementById('remove-input')) {
+                let minus = document.createElement('a')
+                minus.setAttribute('id', 'remove-input');
+                minus.setAttribute('onClick', 'removeInput()');
+                let icon = document.createElement('i');
+                icon.classList.add('fas');
+                icon.classList.add('fa-minus-circle');
+                icon.style.fontSize = '2rem';
+                icon.style.color = 'red';
+                minus.appendChild(icon);
+                buttons.appendChild(minus)
+                minus.style.cursor = 'pointer';
+            }
+
         });
 
         function removeInput() {
-            let req = document.getElementsByClassName('req');
-            if ( req ) {
-                let len = req.length;
-                req[len-1].remove();
-            }
-            if(req.length === 0) {
-                el.style.display = 'none';
+            let req = document.getElementById('container');
+            let selects = document.getElementsByName('topics[]');
+
+            // console.log(req)
+            if (req.childElementCount > 3) {
+                req.removeChild(req.lastChild)
+
+                for(let i=0; i<selects.length; i++) {
+                    let option =document.createElement('option');
+                    option.setAttribute('value', req.lastChild.lastChild.value);
+                    option.innerText = req.lastChild.lastChild.innerText;
+                    selects[i].appendChild(option);
+                }
+
+                req.removeChild(req.lastChild)
+
+                if (req.childElementCount == 3) {
+                    document.getElementById('remove-input').remove();
+                }
             }
         }
 
         function insertAfter(newNode, existingNode) {
             existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
         }
+
+
         </script>
 @endsection

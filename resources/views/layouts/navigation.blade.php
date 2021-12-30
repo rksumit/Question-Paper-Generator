@@ -25,16 +25,16 @@
         </a>
     </li>
 
-    <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
+    <li class="nav-item {{ (request()->is('subjects*')) ? 'active' : '' }}">
         <a href="{{ route('subjects.index') }}"> Subjects </a>
     </li>
-    <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
+    <li class="nav-item {{ (request()->is('topics*')) ? 'active' : '' }}">
         <a href="{{ route('topics.index') }}"> Topics </a>
     </li>
-    <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
+    <li class="nav-item {{ (request()->is('questions/*')) || (request()->is('questions')) ? 'active' : '' }}">
         <a href="{{ route('questions.index') }}"> Questions </a>
     </li>
-    <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
+    <li class="nav-item {{ (request()->is('questionsetgen')) ? 'active' : '' }}">
         <a href="{{ route('questions.set') }}"> Generate Question Set </a>
     </li>
     {{-- <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
