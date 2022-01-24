@@ -21,7 +21,7 @@
             <h2>Teachers</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('subjects.create') }}"> Add Teacher</a>
+            <a class="btn btn-success" href="{{ route('teachers.create') }}"> Add Teacher</a>
         </div>
     </div>
 
