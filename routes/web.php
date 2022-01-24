@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::resource('teachers', TeacherController::class);
     Route::resource('subjects', SubjectController::class);
     Route::resource('topics', TopicController::class);
     Route::resource('questions', QuestionController::class);

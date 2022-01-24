@@ -24,6 +24,9 @@
             <span class="text">{{ __('Users') }}</span>
         </a>
     </li>
+    <li class="nav-item {{ (request()->is('teachers*')) ? 'active' : '' }}">
+        <a href="{{ route('teachers.index') }}"> Teachers </a>
+    </li>
 
     <li class="nav-item {{ (request()->is('subjects*')) ? 'active' : '' }}">
         <a href="{{ route('subjects.index') }}"> Subjects </a>
