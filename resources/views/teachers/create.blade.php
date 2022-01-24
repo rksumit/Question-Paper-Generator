@@ -70,7 +70,7 @@
         <div class="form-group">
             <label class="control-label col-sm-3" for="phone"><b>Mobile Number</b></label>
             <div class="col-sm-5">
-                <input type="number" class="form-control" name="phone" id="phone"
+                <input type="phone" class="form-control" name="phone" id="phone"
                     value="{{ old('phone') ? old('phone') : '' }}" >
             </div>
 
