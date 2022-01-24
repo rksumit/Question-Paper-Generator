@@ -8,12 +8,12 @@
                 <h2>Edit</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('subjects.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('teachers.index') }}"> Back</a>
             </div>
         </div>
     </div>
 
-    <form class="form-horizontal" action="{{ route('subjects.update', $subject->id) }}" method="POST">
+    <form class="form-horizontal" action="{{ route('teachers.update', $teacher->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -22,58 +22,63 @@
 
                 <div class="card-body">
                     <div class="form-group">
-                        {{-- <input type="hidden" name="id" id="id" value="{{$subejct->id}}" id="id" /> --}}
-                        <label class="control-label col-sm-3" for="entersubjects"><b>Name</b></label>
+                        <label class="control-label col-sm-3" for="enterteachername"><b> Name</b></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="name" id="entersubjects"
-                                value="{{ $subject->name }}" >
+                            <input type="text" class="form-control" name="name" id="enterteachername"
+                                value="{{ old('name') ? old('name') : '' }}" >
                         </div>
                     </div>
                     @if($errors->has('name'))
                     <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                 @endif
                     <div class="form-group">
-                        <label class="control-label col-sm-3" for="code"><b>Code</b></label>
+                        <label class="control-label col-sm-3" for="address"><b>Address</b></label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="code" id="Code" value="{{ $subject->code }}"
-                                >
+                            <input type="text" class="form-control" name="address" id="address"
+                                value="{{ old('address') ? old('address') : '' }}" >
                         </div>
+
                     </div>
-                    @if($errors->has('code'))
-                    <div class="alert alert-danger">{{ $errors->first('code') }}</div>
+                    @if($errors->has('address'))
+                    <div class="alert alert-danger">{{ $errors->first('address') }}</div>
                 @endif
-                    {{-- <div class="form-group">
-            <label class="control-label col-sm-3" for="Questionset"><b>Subject</b></label>
+
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="qualification"><b>Qualification</b></label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="qualification" id="qualification"
+                            value="{{ old('qualification') ? old('qualification') : '' }}" >
+                    </div>
+
+                </div>
+                @if($errors->has('qualification'))
+                <div class="alert alert-danger">{{ $errors->first('qualification') }}</div>
+            @endif
+
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="experience"><b>Experience</b></label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="experience" id="experience"
+                        value="{{ old('experience') ? old('experience') : '' }}" >
+                </div>
+
+            </div>
+            @if($errors->has('experience'))
+            <div class="alert alert-danger">{{ $errors->first('experience') }}</div>
+        @endif
+
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="phone"><b>Mobile Number</b></label>
             <div class="col-sm-5">
-        <select class="form-control form-control-lg" name="subject" id="Questionset">
-            @forelse ($subjects as $subject)
-                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                <input type="number" class="form-control" name="phone" id="phone"
+                    value="{{ old('phone') ? old('phone') : '' }}" >
+            </div>
 
-            @empty
-                <option value=""> No any Subjects Added </option>
-            @endforelse
-          </select>
         </div>
-        </div> --}}
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="Questionset"><b>Teacher</b></label>
-                        <div class="col-sm-5">
-                            <select class="form-control form-control-lg" name="teacher_id" id="Questionset">
-                                @forelse ($teachers as $teacher)
-                                    <option value="{{ $teacher->id }}">
-                                        {{ $teacher->name }}
-                                    </option>
-                                @empty
-                                    <option value=""> No any teachers Edited </option>
-                                @endforelse
-                            </select>
-                        </div>
-                    </div>
-                    @if($errors->has('teacher_id'))
-                    <div class="alert alert-danger">{{ $errors->first('teacher_id') }}</div>
-                @endif
-
+        @if($errors->has('phone'))
+        <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
+    @endif
 
 
                     <div class="form-group">
