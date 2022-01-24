@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TeacherRequest;
+use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 
@@ -35,31 +37,24 @@ class TeacherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TeacherRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        Teacher::create($data);
+
+        return redirect()->route('teachers.index')
+            ->with('success', 'Teacher created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Teacher $teacher)
     {
-        //
+        $teachers = Teacher::find($teacher->id);
+        // dd($topic);
+        $teachers = Teacher::all();
+
+        return view('teachers.edit', compact('teacher', 'teachers'));
     }
 
     /**
@@ -69,9 +64,15 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
-        //
+        $data = $request->validated();
+
+        // dd($data);
+
+        $teacher->update($data);
+        return redirect()->route('teachers.index')
+            ->with('success', 'Teacher updated successfully');
     }
 
     /**
@@ -80,8 +81,11 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Teacher $teacher)
     {
-        //
+        $teacher->delete();
+
+        return redirect()->route('teachers.index')
+            ->with('success', 'Teacher deleted successfully');
     }
 }

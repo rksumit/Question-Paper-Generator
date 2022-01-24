@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Create Subject</h2>
+                <h2>Create Teacher</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('teachers.index') }}"> Back</a>
@@ -21,7 +21,6 @@
 
                 <div class="card-body">
                     <div class="form-group">
-                        {{-- <input type="hidden" name="id" id="id" value="{{$subejct->id}}" id="id" /> --}}
                         <label class="control-label col-sm-3" for="enterteachername"><b> Name</b></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="name" id="enterteachername"
@@ -69,15 +68,15 @@
         @endif
 
         <div class="form-group">
-            <label class="control-label col-sm-3" for="mobilenumber"><b>Mobile Number</b></label>
+            <label class="control-label col-sm-3" for="phone"><b>Mobile Number</b></label>
             <div class="col-sm-5">
-                <input type="number" class="form-control" name="mobilenumber" id="mobilenumber"
-                    value="{{ old('mobilenumber') ? old('mobilenumber') : '' }}" >
+                <input type="number" class="form-control" name="phone" id="phone"
+                    value="{{ old('phone') ? old('phone') : '' }}" >
             </div>
 
         </div>
-        @if($errors->has('mobilenumber'))
-        <div class="alert alert-danger">{{ $errors->first('mobilenumber') }}</div>
+        @if($errors->has('phone'))
+        <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
     @endif
 
 
@@ -91,6 +90,7 @@
 
                 </div>
             </div>
+
         </div>
         </div>
 
