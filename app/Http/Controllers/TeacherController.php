@@ -54,7 +54,7 @@ class TeacherController extends Controller
         // dd($topic);
         $teachers = Teacher::all();
 
-        return view('teachers.edit', compact('teacher', 'teachers'));
+        return view('teachers.edit', compact('teachers'));
     }
 
     /**

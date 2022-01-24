@@ -25,11 +25,11 @@ class TeacherRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'address' => 'required',
-            'qualification' => 'required',
-            'experience' => 'required',
-            'phone' => 'required',
+            'name' => 'required|string|max:255|',
+            'address' => 'required|string|max:255|',
+            'qualification' => 'required|string|max:255|',
+            'experience' => 'required|string|max:255|',
+            'phone' => ['required','string','max:10','unique:teachers,phone'],
         ];
     }
 }
