@@ -18,10 +18,10 @@
 
     <div class="content-header">
         <div class="pull-left">
-            <h2>Subject</h2>
+            <h2>Teachers</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('subjects.create') }}"> Add Subject</a>
+            <a class="btn btn-success" href="{{ route('subjects.create') }}"> Add Teacher</a>
         </div>
     </div>
 
