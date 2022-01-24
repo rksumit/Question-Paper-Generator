@@ -3,6 +3,7 @@
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
