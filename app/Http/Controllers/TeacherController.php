@@ -43,7 +43,15 @@ class TeacherController extends Controller
     {
         $data = $request->validated();
 
-        Teacher::create($data);
+        Teacher::create([
+            'name' => $data['name'],
+            'address' => $data['address'],
+            'qualification' => $data['qualification'],
+            'experience' => $data['experience'],
+            'phone' => $data['phone'],
+            'user_id' => auth()->user()->id,
+        ]);
+
 
         return redirect()->route('teachers.index')
             ->with('success', 'Teacher created successfully.');
