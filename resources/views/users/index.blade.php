@@ -1,50 +1,49 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- ========== title-wrapper start ========== -->
-    <div class="title-wrapper pt-30">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="title mb-30">
-                    <h2>{{ __('Users') }}</h2>
-                </div>
-            </div>
-            <!-- end col -->
-        </div>
-        <!-- end row -->
+<style>
+    .content-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.2rem;
+    }
+
+    th,
+    td {
+        text-align: center;
+    }
+
+</style>
+
+<div class="content-header">
+    <div class="pull-left">
+        <h2>Users</h2>
     </div>
-    <!-- ========== title-wrapper end ========== -->
 
-    <div class="card-styles">
-        <div class="card-style-3 mb-30">
-            <div class="card-content">
+</div>
 
-                <div class="alert-box primary-alert">
-                    <div class="alert">
-                        <p class="text-medium">
-                            Teacher's table
-                        </p>
-                    </div>
-                </div>
+<table class="table table-bordered">
+    <thead>
 
-                <div class="table-wrapper table-responsive">
-                    <table class="table striped-table">
-                        <thead>
-                        <tr>
-                            <th><h6>Name</h6></th>
-                            <th><h6>Email</h6></th>
-                        </tr>
-                        <!-- end table row-->
-                        </thead>
-                        <tbody>
-                        @foreach($users as $user)
-                            <tr>
-                                <td>
-                                    <p>{{ $user->name }}</p>
-                                </td>
-                                <td>
-                                    <p>{{ $user->email }}</p>
-                                </td>
+        <tr>
+
+            <th>S.No</th>
+
+            <th>Name</th>
+
+            <th>Email</th>
+
+
+        </tr>
+    </thead>
+    </thead>
+    <tbody>
+        {{-- {{ dd($topics)}} --}}
+        @foreach ($users as $user)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
                             </tr>
                         @endforeach
                         <!-- end table row -->
