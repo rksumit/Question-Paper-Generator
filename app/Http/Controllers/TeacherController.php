@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Teacher;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -17,7 +16,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher:: with('user')->get();
+        $teachers = Teacher::all();
         return view('teachers.index', compact('teachers'));
     }
 
@@ -29,8 +28,7 @@ class TeacherController extends Controller
     public function create()
     {
         $teachers = Teacher::all();
-        $user = User::all();
-        return view('teachers.create', compact('teachers', 'user'));
+        return view('teachers.create', compact('teachers'));
     }
 
     /**
@@ -43,15 +41,7 @@ class TeacherController extends Controller
     {
         $data = $request->validated();
 
-        Teacher::create([
-            'name' => $data['name'],
-            'address' => $data['address'],
-            'qualification' => $data['qualification'],
-            'experience' => $data['experience'],
-            'phone' => $data['phone'],
-            'user_id' => auth()->user()->id,
-        ]);
-
+        Teacher::create($data);
 
         return redirect()->route('teachers.index')
             ->with('success', 'Teacher created successfully.');

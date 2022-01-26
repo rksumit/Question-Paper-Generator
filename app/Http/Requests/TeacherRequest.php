@@ -30,7 +30,6 @@ class TeacherRequest extends FormRequest
             'qualification' => 'required|string|max:255|',
             'experience' => 'required|string|max:255|',
             'phone' => ['required','string','max:10','unique:teachers,phone'],
-            'user_id' => 'required',
         ];
     }
 }

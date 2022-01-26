@@ -16,7 +16,6 @@ class Teacher extends Model
         'qualification',
         'experience',
         'phone',
-        'user_id'
     ];
     public function user()
     {

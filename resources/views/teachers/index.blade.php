@@ -55,7 +55,7 @@
                     <td>{{ $teacher->address }}</td>
                     <td>{{ $teacher->qualification }}</td>
                     <td>{{ $teacher->experience }}</td>
-                    <td>{{ $teacher->mobilenumber }}</td>
+                    <td>{{ $teacher->phone }}</td>
                     <td>
 
                         <a href="{{ url('/teachers/' . $teacher->id . '/edit') }}" title="Edit Teacher"><button
