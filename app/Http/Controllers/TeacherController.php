@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -28,7 +29,8 @@ class TeacherController extends Controller
     public function create()
     {
         $teachers = Teacher::all();
-        return view('teachers.create', compact('teachers'));
+        $user = User::all();
+        return view('teachers.create', compact('teachers', 'user'));
     }
 
     /**
