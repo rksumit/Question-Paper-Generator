@@ -51,7 +51,7 @@
             @foreach ($teachers as $teacher)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $teacher->name }}</td>
+                    <td>{{ $teacher->user->name }}</td>
                     <td>{{ $teacher->address }}</td>
                     <td>{{ $teacher->qualification }}</td>
                     <td>{{ $teacher->experience }}</td>

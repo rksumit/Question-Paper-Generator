@@ -22,7 +22,7 @@
                     {{ __('You are logged in!') }}
                 </p>
                 <br>
-                <a>Let's Enroll</a>
+                <p>Number of subjects: {{ $subject_count }}</p>
             </div>
         </div>
     </div>

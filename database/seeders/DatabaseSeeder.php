@@ -23,19 +23,18 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'is_admin' => 1,
         ]);
-        User::create([
-            'name' => 'Dhiru DADA',
-            'email' => 'dhiru@dada.com',
+        $user = User::create([
+            'name' => 'Sumit Thakur',
+            'email' => 'thakur@sumit.com',
             'password' => Hash::make('password'),
-            'is_admin' => 1,
+            'is_admin' => 0,
         ]);
-        Teacher::create([
-            'name' => 'Dhiru DADA',
-            'address' => 'Dhiru DADA ko Address',
-            'qualification' => 'Dhiru DADA ko QUalification',
-            'experience' => 'Dhiru DADA ko experience',
-            'phone' => 112531232,
-            'user_id' => 2,
+
+        $user->teacher()->create([
+            'address' => 'Sumit Thakur ko Address',
+            'qualification' => 'Sumit Thakur ko QUalification',
+            'experience' => 'Sumit Thakur ko experience',
+            'phone' => '112531232',
         ]);
     }
 }

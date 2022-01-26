@@ -70,7 +70,7 @@
         <div class="form-group">
             <label class="control-label col-sm-3" for="phone"><b>Mobile Number</b></label>
             <div class="col-sm-5">
-                <input type="phone" class="form-control" name="phone" id="phone"
+                <input type="number" class="form-control" name="phone" id="phone"
                     value="{{ old('phone') ? old('phone') : '' }}" >
             </div>
 
@@ -78,6 +78,18 @@
         @if($errors->has('phone'))
         <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
     @endif
+
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="email"><b>Email</b></label>
+        <div class="col-sm-5">
+            <input type="email" class="form-control" name="email" id="email"
+                value="{{ old('email') ? old('email') : '' }}" >
+        </div>
+
+    </div>
+    @if($errors->has('email'))
+    <div class="alert alert-danger">{{ $errors->first('email') }}</div>
+@endif
 
 
 

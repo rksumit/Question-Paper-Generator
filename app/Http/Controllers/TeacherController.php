@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
@@ -40,8 +42,18 @@ class TeacherController extends Controller
     public function store(TeacherRequest $request)
     {
         $data = $request->validated();
-
-        Teacher::create($data);
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make('password'),
+            'is_admin' => 0
+        ]);
+        $user->teacher()->create([
+            'address' => $data['address'],
+            'qualification' => $data['qualification'],
+            'experience' => $data['experience'],
+            'phone' => $data['phone'],
+        ]);
 
         return redirect()->route('teachers.index')
             ->with('success', 'Teacher created successfully.');
@@ -50,11 +62,7 @@ class TeacherController extends Controller
 
     public function edit(Teacher $teacher)
     {
-        $teachers = Teacher::find($teacher->id);
-        // dd($topic);
-        $teachers = Teacher::all();
-
-        return view('teachers.edit', compact('teachers'));
+        return view('teachers.edit', compact('teacher'));
     }
 
     /**
@@ -67,10 +75,18 @@ class TeacherController extends Controller
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
         $data = $request->validated();
-
         // dd($data);
+        $teacher->user()->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+        ]);
 
-        $teacher->update($data);
+        $teacher->update([
+            'address' => $data['address'],
+            'qualification' => $data['qualification'],
+            'experience' => $data['experience'],
+            'phone' => $data['phone'],
+        ]);
         return redirect()->route('teachers.index')
             ->with('success', 'Teacher updated successfully');
     }

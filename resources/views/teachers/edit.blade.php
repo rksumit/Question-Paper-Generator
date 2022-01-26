@@ -12,10 +12,9 @@
             </div>
         </div>
     </div>
-
     <form class="form-horizontal" action="{{ route('teachers.update', $teacher->id) }}" method="POST">
         @csrf
-        @method('PUT')
+        @method('PATCH')
 
         <div class="card">
             <div class="shadow p-3 mb-5 bg-white rounded">
@@ -25,7 +24,7 @@
                         <label class="control-label col-sm-3" for="enterteachername"><b> Name</b></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="name" id="enterteachername"
-                                value="{{ old('name') ? old('name') : '' }}" >
+                                value="{{$teacher->user->name ? $teacher->user->name : old('name') }}" >
                         </div>
                     </div>
                     @if($errors->has('name'))
@@ -35,7 +34,7 @@
                         <label class="control-label col-sm-3" for="address"><b>Address</b></label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="address" id="address"
-                                value="{{ old('address') ? old('address') : '' }}" >
+                                value="{{$teacher->address? $teacher->address: old('address') }}" >
                         </div>
 
                     </div>
@@ -48,7 +47,7 @@
                     <label class="control-label col-sm-3" for="qualification"><b>Qualification</b></label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" name="qualification" id="qualification"
-                            value="{{ old('qualification') ? old('qualification') : '' }}" >
+                            value="{{ $teacher->qualification? $teacher->qualification: old('qualification') }}" >
                     </div>
 
                 </div>
@@ -60,7 +59,7 @@
                 <label class="control-label col-sm-3" for="experience"><b>Experience</b></label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" name="experience" id="experience"
-                        value="{{ old('experience') ? old('experience') : '' }}" >
+                        value="{{ $teacher->experience? $teacher->experience: old('experience') }}" >
                 </div>
 
             </div>
@@ -71,14 +70,26 @@
         <div class="form-group">
             <label class="control-label col-sm-3" for="phone"><b>Mobile Number</b></label>
             <div class="col-sm-5">
-                <input type="phone" class="form-control" name="phone" id="phone"
-                    value="{{ old('phone') ? old('phone') : '' }}" >
+                <input type="number" class="form-control" name="phone" id="phone"
+                    value="{{ $teacher->phone? $teacher->phone: old('phone') }}" >
             </div>
 
         </div>
         @if($errors->has('phone'))
         <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
     @endif
+
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="email"><b>Email</b></label>
+        <div class="col-sm-5">
+            <input type="email" class="form-control" name="email" id="email"
+                value="{{ $teacher->user->email? $teacher->user->email: old('email')}}" >
+        </div>
+
+    </div>
+    @if($errors->has('email'))
+    <div class="alert alert-danger">{{ $errors->first('email') }}</div>
+@endif
 
 
                     <div class="form-group">

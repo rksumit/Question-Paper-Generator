@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 class UpdateTeacherRequest extends FormRequest
 {
@@ -25,14 +26,8 @@ class UpdateTeacherRequest extends FormRequest
     public function rules()
     {
         return array_merge((new TeacherRequest())->rules(), [
-            'name' => 'required|string|max:255|',
-            'address' => 'required|string|max:255|',
-            'qualification' => 'required|string|max:255|',
-            'experience' => 'required|string|max:255|',
-            'phone' => ['required','string','max:10','unique:teachers,phone'],
-
-
-
+            'phone' => ['required', Rule::unique('teachers', 'phone')->ignore($this->teacher), 'string', 'max:255'],
+            'email' => ['required', Rule::unique('users', 'email')->ignore($this->teacher->user), 'email', 'max:255'],
         ]);
     }
 }
