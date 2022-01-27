@@ -62,7 +62,7 @@
                             <select class="form-control form-control-lg" name="teacher_id" id="Questionset">
                                 @forelse ($teachers as $teacher)
                                     <option value="{{ $teacher->id }}">
-                                        {{ $teacher->name }}
+                                        {{ $teacher->user->name }}
                                     </option>
                                 @empty
                                     <option value=""> No any teachers Added </option>

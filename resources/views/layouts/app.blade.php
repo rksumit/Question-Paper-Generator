@@ -19,7 +19,7 @@
         <div class="navbar-logo">
             <a href="{{ route('home') }}">
                 {{-- <img src="{{ asset('images/logo/logo.svg') }}" alt="logo"/> --}}
-                QPG
+                Question Paper Generator
             </a>
         </div>
         <nav class="sidebar-nav">

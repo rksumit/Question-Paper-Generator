@@ -49,7 +49,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $subject->name }}</td>
                     <td>{{ $subject->code }}</td>
-                    <td>{{ $subject->teacher->name }}</td>
+                    <td>{{ $subject->teacher->user->name }}</td>
                     <td>
 
                         <a href="{{ url('/subjects/' . $subject->id . '/edit') }}" title="Edit Subject"><button
