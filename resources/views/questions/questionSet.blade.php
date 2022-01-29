@@ -41,6 +41,17 @@
                 @if($errors->has('name'))
                 <div class="alert alert-danger">{{ $errors->first('name') }}</div>
             @endif
+                <div class="form-group">
+                    {{-- <input type="hidden" name="id" id="id" value="{{$subejct->id}}" id="id" /> --}}
+                    <label class="control-label col-sm-3" for="no_of_questions"><b> Number Of Questions </b></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="no_of_questions" id="no_of_questions"
+                            value="{{ old('no_of_questions') ? old('no_of_questions') : '' }}" >
+                    </div>
+                </div>
+                @if($errors->has('no_of_questions'))
+                    <div class="alert alert-danger">{{ $errors->first('no_of_questions') }}</div>
+                @endif
                 <div class="form-group mb-3">
                     <label class="control-label col-sm-3" for="topics"><b>Topic</b></label>
                     <div class="row" id="container">

@@ -69,6 +69,6 @@
             @endforeach
         </tbody>
     </table>
-
+{{ $topics->links() }}
 
 @endsection

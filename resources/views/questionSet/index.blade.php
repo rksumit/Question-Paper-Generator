@@ -31,7 +31,7 @@
     </thead>
     </thead>
     <tbody>
-        @foreach ($questionSets as $questionSet)
+        @forelse ($questionSets as $questionSet)
             <tr>
                 <td class="text-center">{{ $loop->iteration }}</td>
                 <td class="text-center">{{ $questionSet->letter }}</td>
@@ -42,7 +42,11 @@
                     <a href="{{ route('questionset.show', $questionSet->id) }}" class="btn btn-primary"> View Question Set </a>
                 </td>
             </tr>
-        @endforeach
+            @empty
+            <tr>
+                <td colspan="6"> No any Question Sets Generated </td>
+            </tr>
+        @endforelse
     </tbody>
 </table>
 

@@ -22,7 +22,7 @@ class TopicController extends Controller
     {
         $topic_count = Topic::with('subject')->count();
         
-        $topics = Topic::with('subject')->get();
+        $topics = Topic::with('subject')->paginate(15);
         return view('topics.index', compact('topics'));
     }
 

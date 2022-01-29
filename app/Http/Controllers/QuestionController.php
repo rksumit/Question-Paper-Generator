@@ -20,7 +20,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions= Question::with('topic')->get();
+        $questions= Question::with('topic')->paginate(15);
         return view('questions.index', compact('questions'));
     }
 
@@ -106,6 +106,7 @@ class QuestionController extends Controller
     }
 
     public function genQuestionSet() {
+        // $subjects = Subject::all();
         $topics = Topic::all();
         return view('questions.questionSet', compact('topics'));
     }
@@ -113,10 +114,17 @@ class QuestionController extends Controller
     public function generateSet(Request $request) {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'no_of_questions' => 'required|integer|min:5|max:20',
             'topics' => 'array',
             'weightage' => 'array'
         ]);
-        $topics = [1,1,1,2,2,2];
+        // dd($validated);
+        $topics = [];
+        for ($i = 0; $i < intval($validated['no_of_questions']); $i++){
+            // echo myRand($arr, $freq, count($arr)) . '<br>';
+            $topic = myrand($validated['topics'], $validated['weightage'], count($validated['topics']));
+            array_push($topics, $topic);
+        }
         $questionSet = QuestionSet::create([
             'letter' => $validated['name']
         ]);
@@ -139,6 +147,7 @@ class QuestionController extends Controller
 
     public function questionSetIndex() {
         $questionSets = QuestionSet::with('questions.topic.subject')->get();
+        // dd($questionSets);
         return view('questionSet.index', compact('questionSets'));
     }
 
@@ -147,4 +156,49 @@ class QuestionController extends Controller
         // dd($questionSet);
         return view('questionSet.show', compact('questionSet'));
     }
+
+    
 };
+
+function findCeil($arr, $r, $l, $h)
+    {
+        while ($l < $h)
+        {
+            $mid = ($l + $h)/2;
+            ($r > $arr[$mid]) ? ($l = $mid + 1) : ($h = $mid);
+        }
+        return ($arr[$l] >= $r) ? $l : -1;
+    }
+ 
+    // The main function that returns a random number
+    // from arr[] according to distribution array
+    // defined by freq[]. n is size of arrays.
+    function myRand($arr, $freq,  $n) {
+        // Create and fill cum array
+        $cum= [];
+        $cum[0] = $freq[0];
+        for ($i = 1; $i < $n; ++$i)
+            $cum[$i] = $cum[$i - 1] + $freq[$i];
+ 
+        // cum[n-1] is sum of all frequencies.
+        // Generate a random number with
+        // value from 1 to this sum
+        $r = rand(0, $cum[$n - 1]);
+        // echo $r . '<br>';
+        // Find index of ceiling of r in cum array
+        $indexc = findCeil($cum, $r, 0, $n - 1);
+        // echo $indexc . '<br>';
+        
+        
+        return $arr[$indexc];
+    }
+ 
+    // Driver code
+    $arr = [1, 2, 3, 4];
+    $freq = [20, 10, 40, 20];
+ 
+    // Use a different seed value for every run.
+ 
+    // Let us generate 10 random numbers according to
+    // given distribution
+    
