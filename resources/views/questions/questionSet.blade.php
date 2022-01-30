@@ -30,6 +30,11 @@
         <div class="shadow p-3 mb-5 bg-white rounded">
 
             <div class="card-body">
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">{{$error}}</div>
+                    @endforeach
+                @endif
                 <div class="form-group">
                     {{-- <input type="hidden" name="id" id="id" value="{{$subejct->id}}" id="id" /> --}}
                     <label class="control-label col-sm-3" for="entertopics"><b> Name </b></label>
@@ -206,5 +211,5 @@
         }
 
 
-        </script>
+    </script>
 @endsection

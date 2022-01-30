@@ -59,7 +59,7 @@
             <form method="POST" action="{{ url('/questions' . '/' . $question->id) }}" accept-charset="UTF-8" style="display:inline">
                 {{ method_field('DELETE') }}
                 {{ csrf_field() }}
-                <button type="submit" class="btn btn-danger btn-sm" title="Delete Question" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                <button type="submit" class="btn btn-danger btn-sm" title="Delete Question" onclick="return confirm('All the references to this question from all the question set will be deleted. Are you sure?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
             </form>
         </td>
     </tr>

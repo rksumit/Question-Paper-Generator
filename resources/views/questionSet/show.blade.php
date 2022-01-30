@@ -2,12 +2,16 @@
     @section('content')
 
     <div class="content-header">
-        <div class="pull-left">
-            <h2>{{ $questionSet->letter }}</h2>
-        </div>
+<br>
         <div class="pull-right">
             <a class="btn btn-success" href="{{ route('questionset.index') }}"> Back </a>
         </div>
+        <br>
+        <div class="pull-left">
+            <h2 style="text-align: center"> <b> {{ $questionSet->letter }} </b></h2>
+        </div>
+        <br>
+        
     </div>
 
     <table class="table table-bordered">
@@ -17,15 +21,15 @@
 
                 <th>S.No</th>
 
-                <th>Question</th>
+                <th style="text-align: center">Question</th>
 
-                <th>Weightage </th>
+                <th style="text-align: center">Weightage </th>
 
-                <th>Difficulty</th>
+                <th style="text-align: center">Difficulty</th>
 
-                <th>Topic</th>
+                <th style="text-align: center">Topic</th>
 
-                <th>Subject</th>
+                <th style="text-align: center">Subject</th>
 
 
             </tr>

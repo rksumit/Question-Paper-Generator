@@ -45,19 +45,7 @@
         @if($errors->has('weightage'))
         <div class="alert alert-danger">{{ $errors->first('weightage') }}</div>
     @endif
-        {{-- <div class="form-group">
-            <label class="control-label col-sm-3" for="Questionset"><b>Subject</b></label>
-            <div class="col-sm-5">
-        <select class="form-control form-control-lg" name="subject" id="Questionset">
-            @forelse ($subjects as $subject)
-                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-
-            @empty
-                <option value=""> No any Subjects Added </option>
-            @endforelse
-          </select>
-        </div>
-        </div> --}}
+        
 
         <div class="form-group">
             <label class="control-label col-sm-3" for="Questionset"><b>Topic</b></label>

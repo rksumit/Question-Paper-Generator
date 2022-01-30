@@ -2,12 +2,15 @@
 @section('content')
 
 <div class="content-header">
-    <div class="pull-left">
-        <h2> All Question Sets </h2>
-    </div>
+    
     <div class="pull-right">
         <a class="btn btn-success" href="{{ route('questionset.create') }}"> Generate New Question Set </a>
     </div>
+<br>
+    <div class="pull-left">
+        <h2 style="font-size: 25px; text-align:center;"> <b> All Question Sets </b> </h2>
+    </div>
+    <br>
 </div>
 
 <table class="table table-bordered">
@@ -15,16 +18,16 @@
 
         <tr>
 
-            <th>S.No</th>
+            <th style="text-align: center">S.No</th>
 
-            <th>Name</th>
+            <th style="text-align: center">Name</th>
 
-            <th>Total Number of questions </th>
+            <th style="text-align: center">Total Number of questions </th>
 
-            <th>Topics</th>
+            <th style="text-align: center">Topics</th>
 
-            <th>Subject</th>
-            <th>View Question</th>
+            <th style="text-align: center">Subject</th>
+            <th style="text-align: center">View Question</th>
 
 
         </tr>
