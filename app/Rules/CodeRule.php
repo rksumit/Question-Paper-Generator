@@ -26,7 +26,7 @@ class CodeRule implements Rule
     public function passes($attribute, $value)
     {
         $arr = explode('-', $value);
-//        $data = 'csc-1234'
+//        $data = 'CSC-1234'
 //        $ARR = ['CSC1234', '1234']
         if (count($arr) == 2 && !is_numeric($arr[0]) && is_numeric($arr[1])) {
             if (strlen($arr[0]) == 3 && (strlen($arr[1]) == 4))
@@ -45,6 +45,6 @@ class CodeRule implements Rule
      */
     public function message()
     {
-        return 'The Subject Code must be in format xxx-1111 or xxx 1111';
+        return 'The Subject Code must be in format XXX-1111 or xxx 1111';
     }
 }
