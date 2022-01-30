@@ -115,8 +115,10 @@ class QuestionController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'no_of_questions' => 'required|integer|min:5|max:20',
-            'topics' => 'array',
-            'weightage' => 'array'
+            'topics' => 'required|array',
+            'topics.*' => 'required|exists:topics,id',
+            'weightage' => 'required|array',
+            'weightage.*' => 'required|integer|min:1|max:100'
         ]);
         // dd($validated);
         $topics = [];
@@ -192,13 +194,3 @@ function findCeil($arr, $r, $l, $h)
         
         return $arr[$indexc];
     }
- 
-    // Driver code
-    $arr = [1, 2, 3, 4];
-    $freq = [20, 10, 40, 20];
- 
-    // Use a different seed value for every run.
- 
-    // Let us generate 10 random numbers according to
-    // given distribution
-    

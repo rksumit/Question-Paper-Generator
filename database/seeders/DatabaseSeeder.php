@@ -71,6 +71,9 @@ class DatabaseSeeder extends Seeder
             ], [
                 'code' => 'sta-1064',
                 'name' => 'Statistics I',
+            ], [
+                'code' => 'STA164',
+                'name' => 'Statistics I',
             ],
 
         ];

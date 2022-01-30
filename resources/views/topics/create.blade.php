@@ -65,9 +65,6 @@
                     @if($errors->has('subject_id'))
                     <div class="alert alert-danger">{{ $errors->first('subject_id') }}</div>
                 @endif
-
-
-
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-10">
                             <button type="submit" class="btn btn-primary">Submit</button>
