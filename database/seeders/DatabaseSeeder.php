@@ -42,34 +42,34 @@ class DatabaseSeeder extends Seeder
         // Seed Subjects
         $subjects = [
             [
-                'code' => 'CSC109',
+                'code' => 'csc-1009',
                 'name' => 'Introduction to Information Technology',
             ], [
-                'code' => 'CSC110',
+                'code' => 'csc-1010',
                 'name' => 'C Programming',
             ], [
-                'code' => 'CSC111',
+                'code' => 'csc-1011',
                 'name' => 'Digital Logic',
             ], [
-                'code' => 'MTH112',
+                'code' => 'mth-1012',
                 'name' => 'Mathematics I',
             ], [
-                'code' => 'PHY113',
+                'code' => 'phy-1013',
                 'name' => 'Physics',
             ], [
-                'code' => 'CSC160',
+                'code' => 'csc-1014',
                 'name' => 'Discrete Structure',
             ], [
-                'code' => 'CSC161',
+                'code' => 'csc-1015',
                 'name' => 'Object-Oriented Programming',
             ], [
-                'code' => 'CSC162',
+                'code' => 'csc-1016',
                 'name' => 'Microprocessor',
             ], [
-                'code' => 'MTH163',
+                'code' => 'mth-1063',
                 'name' => 'Mathematics II',
             ], [
-                'code' => 'STA164',
+                'code' => 'sta-1064',
                 'name' => 'Statistics I',
             ],
 

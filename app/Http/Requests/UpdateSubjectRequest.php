@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Rules\CodeRule;
 
 class UpdateSubjectRequest extends FormRequest
 {
@@ -27,7 +28,7 @@ class UpdateSubjectRequest extends FormRequest
         // dd($this->subject);
         return array_merge((new SubjectRequest())->rules(), [
             'name' => ['required', Rule::unique('subjects', 'name')->ignore($this->subject), 'string', 'max:255'],
-            'code' => ['required', Rule::unique('subjects', 'code')->ignore($this->subject), 'string', 'max:8'],
+            'code' => ['required', Rule::unique('subjects', 'code')->ignore($this->subject), 'string', 'max:8', new CodeRule],
         ]);
     }
 }
