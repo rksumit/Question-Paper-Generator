@@ -5,8 +5,8 @@ namespace App\Http\Requests;
 use App\Rules\CodeRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Str
 use Illuminate\Support\Str;
+
 
 
 class UpdateSubjectRequest extends FormRequest
