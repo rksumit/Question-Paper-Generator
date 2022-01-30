@@ -27,7 +27,7 @@ class UpdateSubjectRequest extends FormRequest
         // dd($this->subject);
         return array_merge((new SubjectRequest())->rules(), [
             'name' => ['required', Rule::unique('subjects', 'name')->ignore($this->subject), 'string', 'max:255'],
-            'code' => ['required', Rule::unique('subjects', 'code')->ignore($this->subject), 'string', 'max:255'],
+            'code' => ['required', Rule::unique('subjects', 'code')->ignore($this->subject), 'string', 'max:8'],
         ]);
     }
 }

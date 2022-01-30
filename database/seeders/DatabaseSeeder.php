@@ -33,10 +33,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $teacher = $user->teacher()->create([
-            'address' => 'Sumit Thakur ko Address',
-            'qualification' => 'Sumit Thakur ko QUalification',
-            'experience' => 'Sumit Thakur ko experience',
-            'phone' => '112531232',
+            'address' => 'Kathmandu',
+            'qualification' => 'Master degree',
+            'experience' => '2 years',
+            'phone' => '9800798151',
         ]);
 
         // Seed Subjects
@@ -82,14 +82,14 @@ class DatabaseSeeder extends Seeder
             $item->teacher_id = $teacher->id;
             $item->save();
         }
-        
+
         $subjects = Subject::all();
         foreach ($subjects as $subject) {
             Topic::factory(15)->create([
                 'subject_id' => $subject->id,
             ])->each(function ($topic) use($user) {
                 Question::factory(15)->create([
-                    'topic_id' => $topic->id, 
+                    'topic_id' => $topic->id,
                     'user_id' => $user->id
                 ]);
             });
