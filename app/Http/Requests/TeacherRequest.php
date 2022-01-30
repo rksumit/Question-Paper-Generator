@@ -29,7 +29,7 @@ class TeacherRequest extends FormRequest
             'address' => 'required|string|max:255|',
             'qualification' => 'required|string|max:255|',
             'experience' => 'required|string|max:255|',
-            'phone' => ['required','string','max:10','unique:teachers,phone'],
+            'phone' => ['required','string','min:10','max:10','unique:teachers,phone'],
             'email' => ['required','email','unique:users,email'],
         ];
     }
