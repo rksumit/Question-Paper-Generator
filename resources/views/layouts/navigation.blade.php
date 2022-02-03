@@ -38,7 +38,7 @@
         <a href="{{ route('questions.index') }}"> Questions </a>
     </li>
     <li class="nav-item {{ (request()->is('questionset*')) ? 'active' : '' }}">
-        <a href="{{ route('questionset.index') }}"> Question Set </a>
+        <a href="{{ route('questionset.index') }}"> Question Sets </a>
     </li>
     {{-- <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
         <a href="AddQuestion"> Teacher </a>
