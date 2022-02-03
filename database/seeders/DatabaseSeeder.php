@@ -85,14 +85,14 @@ class DatabaseSeeder extends Seeder
             $item->teacher_id = $teacher->id;
             $item->save();
         }
-        
+
         $subjects = Subject::all();
         foreach ($subjects as $subject) {
-            Topic::factory(15)->create([
+            Topic::factory(10)->create([
                 'subject_id' => $subject->id,
             ])->each(function ($topic) use($user) {
-                Question::factory(15)->create([
-                    'topic_id' => $topic->id, 
+                Question::factory(10)->create([
+                    'topic_id' => $topic->id,
                     'user_id' => $user->id
                 ]);
             });
