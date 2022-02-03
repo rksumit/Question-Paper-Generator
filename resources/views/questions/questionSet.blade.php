@@ -17,7 +17,7 @@
 
         <br>
         <div class="pull-left">
-            <h2 style="font-size: 25px;"> <b> Generate Question Sets</b></h2>
+            <h2 style="font-size: 25px;"> <b> Generate Question Set Of {{ $subject->name }}</b></h2>
         </div>
         <br>
     </div>

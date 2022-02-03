@@ -106,8 +106,9 @@ class QuestionController extends Controller
     }
 
     public function genQuestionSet($id) {
+        $subject = Subject::where('id', $id)->first();
         $topics = Topic::where('subject_id', $id)->get();
-        return view('questions.questionSet', compact('topics'));
+        return view('questions.questionSet', compact('topics', 'subject'));
     }
 
     public function generateSet(Request $request) {
