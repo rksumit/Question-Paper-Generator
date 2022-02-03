@@ -127,6 +127,17 @@ class QuestionController extends Controller
             $topic = myrand($validated['topics'], $validated['weightage'], count($validated['topics']));
             array_push($topics, $topic);
         }
+        // topics = [1, 1, 4, 5, 6, 8, 1]
+        // topics = [1, 1, 1, 4, 5, 6, 8]
+        $vals = array_count_values($topics);
+        foreach ($vals as $index => $val) {
+            $question_count = Question::where('topic_id', $index)->count();
+            if($question_count < $val) {
+                $topic = Topic::where('id', $index)->first();
+                return redirect()->back()->with('error', 'Not Enough Questions from the topic ' . $topic->topic . '. Please add more questions.');
+            }
+        }
+
         $questionSet = QuestionSet::create([
             'letter' => $validated['name']
         ]);

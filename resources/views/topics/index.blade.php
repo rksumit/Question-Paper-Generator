@@ -45,9 +45,10 @@
         </thead>
         <tbody>
             {{-- {{ dd($topics)}} --}}
+            <?php $i = $topics->perPage() * ($topics->currentPage() - 1) ?>
             @foreach ($topics as $topic)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ ++$i }}</td>
                     <td>{{ $topic->topic }}</td>
                     <td>{{ $topic->hoursallocated }}</td>
                     <td>{{ $topic->subject->name }}</td>
