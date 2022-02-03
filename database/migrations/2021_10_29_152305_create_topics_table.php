@@ -17,7 +17,7 @@ class CreateTopicsTable extends Migration
             $table->id();
             $table->string("topic");
             $table->double("hoursallocated");
-            $table->foreignId('subject_id')->constrained("topics");
+            $table->foreignId('subject_id')->constrained();
             $table->timestamps();
         });
     }
