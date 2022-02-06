@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('subjects', SubjectController::class);
     Route::resource('topics', TopicController::class);
     Route::resource('questions', QuestionController::class);
-    Route::get('/questionset/create',[QuestionController::class, 'genQuestionSet'])->name('questionset.create');
+    Route::get('/questionset/{subject}/create',[QuestionController::class, 'genQuestionSet'])->name('questionset.create');
     Route::post('/questionset/store',[QuestionController::class, 'generateSet'])->name('questionset.store');
     Route::get('/questionset',[QuestionController::class, 'questionSetIndex'])->name('questionset.index');
     Route::get('/questionset/{questionset}/show',[QuestionController::class, 'questionSetShow'])->name('questionset.show');

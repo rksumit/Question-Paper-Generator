@@ -105,10 +105,10 @@ class QuestionController extends Controller
                         ->with('success','Question deleted successfully');
     }
 
-    public function genQuestionSet() {
-        // $subjects = Subject::all();
-        $topics = Topic::all();
-        return view('questions.questionSet', compact('topics'));
+    public function genQuestionSet($id) {
+        $subject = Subject::where('id', $id)->first();
+        $topics = Topic::where('subject_id', $id)->get();
+        return view('questions.questionSet', compact('topics', 'subject'));
     }
 
     public function generateSet(Request $request) {
@@ -170,7 +170,7 @@ class QuestionController extends Controller
         return view('questionSet.show', compact('questionSet'));
     }
 
-    
+
 };
 
 function findCeil($arr, $r, $l, $h)
@@ -182,7 +182,7 @@ function findCeil($arr, $r, $l, $h)
         }
         return ($arr[$l] >= $r) ? $l : -1;
     }
- 
+
     // The main function that returns a random number
     // from arr[] according to distribution array
     // defined by freq[]. n is size of arrays.
@@ -192,7 +192,7 @@ function findCeil($arr, $r, $l, $h)
         $cum[0] = $freq[0];
         for ($i = 1; $i < $n; ++$i)
             $cum[$i] = $cum[$i - 1] + $freq[$i];
- 
+
         // cum[n-1] is sum of all frequencies.
         // Generate a random number with
         // value from 1 to this sum
@@ -201,7 +201,7 @@ function findCeil($arr, $r, $l, $h)
         // Find index of ceiling of r in cum array
         $indexc = findCeil($cum, $r, 0, $n - 1);
         // echo $indexc . '<br>';
-        
-        
+
+
         return $arr[$indexc];
     }

@@ -38,7 +38,7 @@
 
                 <th>Teacher</th>
 
-                <th>Action</th>
+                <th>Actions</th>
 
             </tr>
         </thead>
@@ -64,6 +64,10 @@
                                 onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i>
                                 Delete</button>
                         </form>
+
+                        <a href="{{ route('questionset.create', $subject->id) }}" title="Generate Question Set"><button
+                                class="btn btn-outline-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                Generate Question Set</button></a>
                     </td>
                 </tr>
             @endforeach

@@ -2,10 +2,10 @@
 @section('content')
 
 <div class="content-header">
-    
-    <div class="pull-right">
-        <a class="btn btn-success" href="{{ route('questionset.create') }}"> Generate New Question Set </a>
-    </div>
+
+{{--    <div class="pull-right">--}}
+{{--        <a class="btn btn-success" href="{{ route('questionset.create') }}"> Generate New Question Set </a>--}}
+{{--    </div>--}}
 <br>
     <div class="pull-left">
         <h2 style="font-size: 25px; text-align:center;"> <b> All Question Sets </b> </h2>
