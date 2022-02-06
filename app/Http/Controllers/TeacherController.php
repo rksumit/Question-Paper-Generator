@@ -21,6 +21,7 @@ class TeacherController extends Controller
         $teachers = Teacher::with('teacher')->count();
         //dd($teacher_count);
         $teachers = Teacher::all();
+        
         return view('teachers.index', compact('teachers'));
     }
 

@@ -46,9 +46,10 @@
     </thead>
 </thead>
 <tbody>
+    <?php $i = $questions->perPage() * ($questions->currentPage() - 1) ?>
 @foreach($questions as $question)
     <tr>
-        <td>{{ $loop->iteration }}</td>
+        <td>{{ ++$i }}</td>
         <td>{{ $question->question }}</td>
         <td>{{ $question->weightage }}</td>
         <td>{{ $question->topic->topic }}</td>

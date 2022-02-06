@@ -24,8 +24,6 @@
 
             <th style="text-align: center">Total Number of questions </th>
 
-            <th style="text-align: center">Topics</th>
-
             <th style="text-align: center">Subject</th>
             <th style="text-align: center">View Question</th>
 
@@ -39,7 +37,6 @@
                 <td class="text-center">{{ $loop->iteration }}</td>
                 <td class="text-center">{{ $questionSet->letter }}</td>
                 <td class="text-center">{{ count($questionSet->questions) }}</td>
-                <td class="text-center">{{ $questionSet->questions[0]->topic->topic }}</td>
                 <td class="text-center">{{ $questionSet->questions[0]->topic->subject->name }}</td>
                 <td class="text-center">
                     <a href="{{ route('questionset.show', $questionSet->id) }}" class="btn btn-primary"> View Question Set </a>

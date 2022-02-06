@@ -44,9 +44,10 @@
         </thead>
         </thead>
         <tbody>
+            <?php $i = $subjects->perPage() * ($subjects->currentPage() - 1) ?>
             @foreach ($subjects as $subject)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ ++$i }}</td>
                     <td>{{ $subject->name }}</td>
                     <td>{{ $subject->code }}</td>
                     <td>{{ $subject->teacher->user->name }}</td>
@@ -68,6 +69,6 @@
             @endforeach
         </tbody>
     </table>
-
+    {{ $subjects->links() }}
 
 @endsection

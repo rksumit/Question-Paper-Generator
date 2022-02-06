@@ -26,7 +26,7 @@ class UpdateTeacherRequest extends FormRequest
     public function rules()
     {
         return array_merge((new TeacherRequest())->rules(), [
-            'phone' => ['required', Rule::unique('teachers', 'phone')->ignore($this->teacher), 'string','min:10', 'max:255'],
+            'phone' => ['required', Rule::unique('teachers', 'phone')->ignore($this->teacher), 'string', 'min:10', 'max:10'],
             'email' => ['required', Rule::unique('users', 'email')->ignore($this->teacher->user), 'email', 'max:255'],
         ]);
     }
