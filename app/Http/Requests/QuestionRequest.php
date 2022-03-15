@@ -24,9 +24,9 @@ class QuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'question' => 'required|unique:questions,question',
+            'question' => ['required', 'string', 'max:255', 'unique:questions,question'],
             'weightage' => 'required|gt:0',
-            'topic' => 'required|integer|exists:topics,id',
+            'topic_id' => 'required|integer|exists:topics,id',
             'difficulty_level' => 'required',
         ];
     }

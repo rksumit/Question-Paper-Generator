@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            
+
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('topics.index') }}"> Back</a>
             </div>
@@ -64,7 +64,7 @@
                         <div class="col-sm-5">
                             <select class="form-control form-control-lg" name="subject_id" id="Questionset">
                                 @forelse ($subjects as $subject)
-                                    <option value="{{ $subject->id }}">
+                                    <option value="{{ $subject->id }}" @if($subject->id === $topic->subject_id) selected @endif>
                                         {{ $subject->name }}
                                     </option>
                                 @empty

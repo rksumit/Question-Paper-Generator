@@ -5,9 +5,9 @@
 
 <div class="row">
     <div class="col-lg-12 margin-tb">
-        
+
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('questions.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ url()->previous() }}"> Back</a>
         </div>
 
         <br>
@@ -21,7 +21,6 @@
 <form class="form-horizontal" action="{{ route('questions.update', $question->id) }}" method="POST">
     @csrf
     @method('PUT')
-
     <div class="card">
       <div class="shadow p-3 mb-5 bg-white rounded">
 
@@ -45,15 +44,14 @@
         @if($errors->has('weightage'))
         <div class="alert alert-danger">{{ $errors->first('weightage') }}</div>
     @endif
-        
+
 
         <div class="form-group">
             <label class="control-label col-sm-3" for="Questionset"><b>Topic</b></label>
             <div class="col-sm-5">
-        <select class="form-control form-control-lg" name="topic" id="Questionset">
+        <select class="form-control form-control-lg" name="topic_id" id="Questionset">
             @forelse ($topics as $topic)
                 <option value="{{ $topic->id }}" {{ ($topic->id == $question->topic_id)? 'selected': '' }}>{{ $topic->topic }}</option>
-
             @empty
                 <option value=""> No any topics Added </option>
             @endforelse

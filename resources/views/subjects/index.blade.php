@@ -16,13 +16,15 @@
 
     </style>
 
-    <div class="content-header">
+    <div class="content-header mt-3">
         <div class="pull-left">
-            <h2>Subject</h2>
+            <h2 class="h3">All Subjects</h2>
         </div>
+        @can('create', App\models\Subject::class)
         <div class="pull-right">
             <a class="btn btn-success" href="{{ route('subjects.create') }}"> Add Subject</a>
         </div>
+        @endcan
     </div>
 
     <table class="table table-bordered">
@@ -56,15 +58,16 @@
                         <a href="{{ url('/subjects/' . $subject->id . '/edit') }}" title="Edit Subject"><button
                                 class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 Edit</button></a>
-                        <form method="POST" action="{{ url('/subjects' . '/' . $subject->id) }}" accept-charset="UTF-8"
-                            style="display:inline">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Subject"
-                                onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i>
-                                Delete</button>
-                        </form>
-
+                        @can('delete', App\models\Subject::class)
+                            <form method="POST" action="{{ url('/subjects' . '/' . $subject->id) }}" accept-charset="UTF-8"
+                                style="display:inline">
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Subject"
+                                    onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    Delete</button>
+                            </form>
+                        @endcan
                         <a href="{{ route('questionset.create', $subject->id) }}" title="Generate Question Set"><button
                                 class="btn btn-outline-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 Generate Question Set</button></a>

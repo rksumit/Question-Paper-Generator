@@ -18,10 +18,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::with('teacher')->count();
-        //dd($teacher_count);
+        $this->authorize('viewAny', Teacher::class);
         $teachers = Teacher::all();
-        
+
         return view('teachers.index', compact('teachers'));
     }
 
@@ -32,6 +31,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Teacher::class);
         $teachers = Teacher::all();
         return view('teachers.create', compact('teachers'));
     }
@@ -44,6 +44,8 @@ class TeacherController extends Controller
      */
     public function store(TeacherRequest $request)
     {
+        $this->authorize('create', Teacher::class);
+
         $data = $request->validated();
         $user = User::create([
             'name' => $data['name'],
@@ -65,6 +67,8 @@ class TeacherController extends Controller
 
     public function edit(Teacher $teacher)
     {
+        $this->authorize('view', $teacher);
+
         return view('teachers.edit', compact('teacher'));
     }
 
@@ -77,6 +81,8 @@ class TeacherController extends Controller
      */
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
+        $this->authorize('update', $teacher);
+
         $data = $request->validated();
         // dd($data);
         $teacher->user()->update([
@@ -102,6 +108,8 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
+        $this->authorize('delete', $teacher);
+
         $teacher->user()->delete();
 
         return redirect()->route('teachers.index')

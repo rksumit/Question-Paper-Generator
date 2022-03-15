@@ -10,6 +10,7 @@ use App\Models\Subject;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -18,10 +19,11 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $questions= Question::with('topic')->paginate(15);
-        return view('questions.index', compact('questions'));
+        $questions= Question::with('topic')->where('topic_id', $id)->paginate(15);
+//        dd($questions);
+        return view('questions.index', compact('questions', 'id'));
     }
 
     /**
@@ -29,12 +31,11 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $questions= Question:: all();
-        $topics = Topic::all();
-        return view('questions.create', compact('questions', 'topics'));
-
+        $questions= Question::all();
+        $topic = Topic::findOrFail($id);
+        return view('questions.create', compact('questions', 'topic'));
     }
 
     /**
@@ -45,18 +46,17 @@ class QuestionController extends Controller
      */
     public function store(QuestionRequest $request)
     {
-        // dd($request->all());
         $data = $request->validated();
         // dd($request->user());
         Question::create([
             'question' => $data['question'],
             'weightage' => $data['weightage'],
             'difficulty_level' => $data['difficulty_level'],
-            'topic_id' => $data['topic'],
+            'topic_id' => $data['topic_id'],
             'user_id' => auth()->user()->id,
         ]);
 
-        return redirect()->route('questions.index')
+        return redirect()->route('questions.index', $data['topic_id'])
                         ->with('success','Question created successfully.');
     }
 
@@ -69,9 +69,26 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
+        $this->authorize('update', $question);
         $question= Question::find($question->id);
         // dd($question);
-        $topics = Topic::all();
+        if (!\auth()->user()->is_admin)
+            $topics = DB::table('topics')
+                ->join('subjects', 'topics.subject_id', '=', 'subjects.id')
+                ->join('teachers', 'subjects.teacher_id', '=', 'teachers.id')
+                ->join('users', 'teachers.user_id', '=', 'users.id')
+                ->where([
+                    ['user_id', '=', \auth()->id()]
+                ])
+                ->select(['topics.id', 'topics.topic'])
+                ->get();
+        else
+            $topics = DB::table('topics')
+                ->join('subjects', 'topics.subject_id', '=', 'subjects.id')
+                ->join('teachers', 'subjects.teacher_id', '=', 'teachers.id')
+                ->join('users', 'teachers.user_id', '=', 'users.id')
+                ->select(['topics.id', 'topics.topic'])
+                ->get();
         return view('questions.edit',compact('question', 'topics'));
     }
 
@@ -84,10 +101,10 @@ class QuestionController extends Controller
      */
     public function update(UpdateQuestionRequest $request, Question $question)
     {
+        $this->authorize('update', $question);
         $data = $request->validated();
-
         $question->update($data);
-        return redirect()->route('questions.index')
+        return redirect()->route('questions.index', $data['topic_id'])
                         ->with('success','Question updated successfully');
     }
 
@@ -99,9 +116,9 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
+        $this->authorize('delete', $question);
         $question->delete();
-
-        return redirect()->route('questions.index')
+        return redirect()->back()
                         ->with('success','Question deleted successfully');
     }
 
