@@ -24,7 +24,7 @@ class UpdateQuestionRequest extends FormRequest
     public function rules()
     {
         return array_merge((new QuestionRequest())->rules(), [
-            'question' => ['required', Rule::unique('questions', 'question')->ignore($this->question), 'string', 'max:255'],
+            'question' => ['string','required', Rule::unique('questions')->ignore($this->question, 'question'),'max:255'],
         ]);
     }
 }

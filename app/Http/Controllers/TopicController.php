@@ -7,9 +7,12 @@ use App\Http\Requests\UpdateSubjectRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Question;
 use App\Models\Subject;
+use App\Models\Teacher;
 use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TopicController extends Controller
 {
@@ -20,9 +23,23 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topic_count = Topic::with('subject')->count();
-        
-        $topics = Topic::with('subject')->paginate(15);
+        if (!\auth()->user()->is_admin)
+            $topics = DB::table('topics')
+                ->join('subjects', 'topics.subject_id', '=', 'subjects.id')
+                ->join('teachers', 'subjects.teacher_id', '=', 'teachers.id')
+                ->join('users', 'teachers.user_id', '=', 'users.id')
+                ->where([
+                    ['user_id', '=', \auth()->id()]
+                ])
+                ->select(['topics.id', 'topics.topic', 'subjects.name as subject', 'hoursallocated'])
+                ->paginate();
+        else
+            $topics = DB::table('topics')
+                ->join('subjects', 'topics.subject_id', '=', 'subjects.id')
+                ->join('teachers', 'subjects.teacher_id', '=', 'teachers.id')
+                ->join('users', 'teachers.user_id', '=', 'users.id')
+                ->select(['topics.id', 'topics.topic', 'subjects.name as subject', 'hoursallocated'])
+                ->paginate();
         return view('topics.index', compact('topics'));
     }
 
@@ -33,7 +50,13 @@ class TopicController extends Controller
      */
     public function create()
     {
-        $subjects = Subject::all();
+        if (\auth()->user()->is_admin)
+            $subjects = Subject::all();
+        else {
+            $teacher = Teacher::where('user_id', \auth()->id())->first();
+//            dd($teacher);
+            $subjects = Subject::where('teacher_id', $teacher->id)->get();
+        }
         return view('topics.create', compact('subjects'));
     }
 
@@ -64,11 +87,16 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-        $topics = Topic::find($topic->id);
-        // dd($topic);
-        $topics = Topic::all();
-        $subjects = Subject::all();
-        return view('topics.edit', compact('topic', 'topics', 'subjects'));
+        $this->authorize('update', $topic);
+
+        if (\auth()->user()->is_admin)
+            $subjects = Subject::all();
+        else {
+            $teacher = Teacher::where('user_id', \auth()->id())->first();
+//            dd($teacher);
+            $subjects = Subject::where('teacher_id', $teacher->id)->get();
+        }
+        return view('topics.edit', compact('topic', 'subjects'));
     }
 
     /**
@@ -81,9 +109,6 @@ class TopicController extends Controller
     public function update(UpdateTopicRequest $request, Topic $topic)
     {
         $data = $request->validated();
-
-        // dd($data);
-
         $topic->update($data);
         return redirect()->route('topics.index')
             ->with('success', 'Topic updated successfully');

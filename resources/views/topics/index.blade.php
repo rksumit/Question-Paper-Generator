@@ -51,12 +51,20 @@
                     <td>{{ ++$i }}</td>
                     <td>{{ $topic->topic }}</td>
                     <td>{{ $topic->hoursallocated }}</td>
-                    <td>{{ $topic->subject->name }}</td>
+                    <td>{{ $topic->subject }}</td>
                     <td>
-
-                        <a href="{{ url('/topics/' . $topic->id . '/edit') }}" title="Edit topic"><button
-                                class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                Edit</button></a>
+                        <a href="{{ url('/topics/' . $topic->id . '/edit') }}" title="Edit topic">
+                            <button class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                Edit
+                            </button>
+                        </a>
+                        <a href="{{ url('/topics/' . $topic->id . '/questions') }}" title="View Questions">
+                            <button class="btn btn-outline-success btn-sm">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                View questions
+                            </button>
+                        </a>
                         <form method="POST" action="{{ url('/topics' . '/' . $topic->id) }}" accept-charset="UTF-8"
                             style="display:inline">
                             {{ method_field('DELETE') }}

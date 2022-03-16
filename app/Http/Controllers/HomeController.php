@@ -27,23 +27,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
 
+//        dd(auth()->user()->is_admin);
         $subject_count = Subject::count();
         $teacher_count = Teacher::count();
         $question_count = Question::count();
         $questionset_count = QuestionSet::count();
-
-
-        
-        
         //dd($subject_count);
         return view('home', compact('teacher_count','subject_count','question_count','questionset_count'));
-        
 
-        
+
+
     }
 
 
-    
+
 }

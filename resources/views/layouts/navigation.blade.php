@@ -10,7 +10,7 @@
             <span class="text">{{ __('Dashboard') }}</span>
         </a>
     </li>
-
+    @can('viewAny', App\models\User::class)
     <li class="nav-item @if (request()->routeIs('users.index')) active @endif">
         <a href="{{ route('users.index') }}">
             <span class="icon">
@@ -24,9 +24,13 @@
             <span class="text">{{ __('Users') }}</span>
         </a>
     </li>
+    @endcan
+
+    @can('viewAny', App\models\Teacher::class)
     <li class="nav-item {{ (request()->is('teachers*')) ? 'active' : '' }}">
         <a href="{{ route('teachers.index') }}"> Teachers </a>
     </li>
+    @endcan
 
     <li class="nav-item {{ (request()->is('subjects*')) ? 'active' : '' }}">
         <a href="{{ route('subjects.index') }}"> Subjects </a>
@@ -34,9 +38,9 @@
     <li class="nav-item {{ (request()->is('topics*')) ? 'active' : '' }}">
         <a href="{{ route('topics.index') }}"> Topics </a>
     </li>
-    <li class="nav-item {{ (request()->is('questions/*')) || (request()->is('questions')) ? 'active' : '' }}">
-        <a href="{{ route('questions.index') }}"> Questions </a>
-    </li>
+{{--    <li class="nav-item {{ (request()->is('questions/*')) || (request()->is('questions')) ? 'active' : '' }}">--}}
+{{--        <a href="{{ route('questions.index') }}"> Questions </a>--}}
+{{--    </li>--}}
     <li class="nav-item {{ (request()->is('questionset*')) ? 'active' : '' }}">
         <a href="{{ route('questionset.index') }}"> Question Sets </a>
     </li>

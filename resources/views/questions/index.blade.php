@@ -21,7 +21,7 @@
     <h2>Questions</h2>
     </div>
     <div class="pull-right">
-    <a class="btn btn-success" href="{{ route('questions.create') }}"> Add Question</a>
+    <a class="btn btn-success" href="{{ route('questions.create', $id) }}"> Add Question</a>
     </div>
 </div>
 
@@ -56,7 +56,9 @@
         <td>{{ $question->difficulty_level }}</td>
         <td>
 
-            <a href="{{ url('/questions/' . $question->id . '/edit') }}" title="Edit Question"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+            <a href="{{ url('/questions/' . $question->id . '/edit') }}" title="Edit Question">
+                <button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+            </a>
             <form method="POST" action="{{ url('/questions' . '/' . $question->id) }}" accept-charset="UTF-8" style="display:inline">
                 {{ method_field('DELETE') }}
                 {{ csrf_field() }}

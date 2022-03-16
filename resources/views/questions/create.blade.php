@@ -8,7 +8,7 @@
             <div class="col-lg-12 margin-tb">
                 <br>
                 <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('questions.index') }}"> Back</a>
+                    <a class="btn btn-primary" href="{{ route('questions.index', $topic->id) }}"> Back</a>
                 </div>
 
                 <br>
@@ -18,7 +18,7 @@
               <br>
             </div>
         </div>
-   <form class="form-horizontal" action="{{ route('questions.store') }}" method="POST">
+   <form class="form-horizontal" action="{{ route('questions.store', $topic->id) }}" method="POST">
     @csrf
     <div class="card">
       <div class="shadow p-3 mb-5 bg-white rounded">
@@ -58,15 +58,10 @@
         <div class="form-group">
             <label class="control-label col-sm-3" for="Questionset"><b>Topic</b></label>
             <div class="col-sm-5">
-        <select class="form-control form-control-lg" name="topic" id="Questionset">
-            @forelse ($topics as $topic)
-                <option value="{{ $topic->id }}">{{ $topic->topic }}</option>
-
-            @empty
-                <option value=""> No any topics Added </option>
-            @endforelse
-          </select>
-        </div>
+                <select class="form-control form-control-lg" name="topic_id" id="Questionset" readonly="true">
+                        <option value="{{ $topic->id }}">{{ $topic->topic }}</option>
+                  </select>
+            </div>
         </div><br>
         @if($errors->has('topic'))
         <div class="alert alert-danger">{{ $errors->first('topic') }}</div>
