@@ -59,6 +59,8 @@
                                 Edit
                             </button>
                         </a>
+                        <a class="btn btn-outline-primary" href="{{ route('questions.create', $topic->id) }}"> Add Question</a>
+
                         <a href="{{ url('/topics/' . $topic->id . '/questions') }}" title="View Questions">
                             <button class="btn btn-outline-success btn-sm">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
