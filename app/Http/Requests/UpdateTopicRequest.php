@@ -24,7 +24,7 @@ class UpdateTopicRequest extends FormRequest
     public function rules()
     {
         return array_merge((new TopicRequest())->rules(), [
-            'topic_id' => 'required',
+
             'hoursallocated' => 'required|gt:0',
             'subject_id' => 'required',
 

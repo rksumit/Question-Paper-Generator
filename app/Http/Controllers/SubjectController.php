@@ -60,7 +60,7 @@ class SubjectController extends Controller
     }
     public function destroy(Subject $subject)
     {
-        $this->authorize('delete');
+        $this->authorize('delete',Subject::class);
 
         $subject->delete();
 
