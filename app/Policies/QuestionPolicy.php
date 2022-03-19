@@ -56,8 +56,8 @@ class QuestionPolicy
     {
         if ($user->is_admin)
             return Response::allow();
-        $question->load('subject.teacher.user');
-        return $question->subject->teacher->user->id == $user->id
+        $question->load('topic.subject.teacher.user');
+        return $question->topic->subject->teacher->user->id == $user->id
             ? Response::allow()
             : Response::deny('You can edit questions of your subjects only.');
     }
@@ -73,8 +73,8 @@ class QuestionPolicy
     {
         if ($user->is_admin)
             return Response::allow();
-        $question->load('subject.teacher.user');
-        return $question->subject->teacher->user->id == $user->id
+        $question->load('topic.subject.teacher.user');
+        return $question->topic->subject->teacher->user->id == $user->id
             ? Response::allow()
             : Response::deny('You can only delete questions of your subjects only.');
     }

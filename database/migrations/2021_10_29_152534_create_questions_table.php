@@ -18,8 +18,8 @@ class CreateQuestionsTable extends Migration
             $table->string("question");
             $table->double("weightage");
             $table->string("difficulty_level");
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('topic_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('topic_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

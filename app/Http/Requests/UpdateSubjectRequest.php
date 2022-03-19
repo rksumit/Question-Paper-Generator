@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 
+
 class UpdateSubjectRequest extends FormRequest
 {
     /**

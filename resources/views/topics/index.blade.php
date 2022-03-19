@@ -36,7 +36,7 @@
 
                 <th>Hoursallocated</th>
 
-                <th>Subject_id</th>
+                <th>Subject</th>
 
                 <th>Action</th>
 

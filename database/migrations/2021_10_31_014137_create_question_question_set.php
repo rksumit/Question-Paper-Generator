@@ -15,8 +15,8 @@ class CreateQuestionQuestionSet extends Migration
     {
         Schema::create('question_question_set', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_id')->constrained();
-            $table->foreignId('question_set_id')->constrained();
+            $table->foreignId('question_id')->constrained()->onDelete('cascade');
+            $table->foreignId('question_set_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

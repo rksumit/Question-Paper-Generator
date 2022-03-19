@@ -77,7 +77,7 @@ class SubjectPolicy
      */
     public function delete(User $user)
     {
-        return $user->is_admin == true
+        return $user->is_admin
             ? Response::allow()
             : Response::deny('You are not an admin.');
     }
